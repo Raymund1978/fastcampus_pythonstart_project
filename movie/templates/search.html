@@ -18,6 +18,16 @@
                             <p><strong>{{ movie.name }}</strong>({{ movie.release_date }})</p>
                             <img width="100px" src="{{ movie.img_url }}"/>
                         </a>
+                        {% with reviews=movie.review_set.all %}
+                            {% if reviews %}
+                                <h6>리뷰</h6>
+                                <ul>
+                                    {% for review in reviews %}
+                                        <li>{{ review.title }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endwith %}
                     </div>
 
                 </div>
