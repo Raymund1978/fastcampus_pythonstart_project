@@ -18,8 +18,25 @@ def review(request, movie_id):
     }
     return render(request, 'review.html', result)
 
+
 def review_delete(request, movie_id, review_id):
     movie = get_object_or_404(Movie, pk=movie_id)
     get_review = get_object_or_404(movie.review_set, pk=review_id)
     get_review.delete()
     return redirect('review', movie_id=movie_id)
+
+
+def review_edit(request, movie_id, review_id):
+    movie = get_object_or_404(Movie, pk=movie_id)
+    get_review = get_object_or_404(movie.review_set, pk=review_id)
+
+    if request.method == 'POST':
+        print(dir(get_review))
+        get_review.title = request.POST.get('title')
+        get_review.content = request.POST.get('content')
+        get_review.save()
+        return redirect('search')
+    return render(request, 'edit.html', {
+        'movie': movie,
+        'review': get_review
+    })

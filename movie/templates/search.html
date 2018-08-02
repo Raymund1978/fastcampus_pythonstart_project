@@ -25,7 +25,8 @@
                                     {% for review in reviews %}
                                         <li>
                                             {{ review.title }}
-                                        <a href="{% url 'review_delete' movie.id review.id %}">삭제</a>
+                                            <a href="{% url 'review_edit' movie.id review.id %}">수정</a>
+                                            <a href="{% url 'review_delete' movie.id review.id %}">삭제</a>
                                         </li>
                                     {% endfor %}
                                 </ul>
