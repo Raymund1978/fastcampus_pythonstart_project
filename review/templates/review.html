@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <h2>{{ movie.name }}</h2>
+            <h4>{{ movie.release_date }}</h4>
+            <img src="{{ movie.img_url }}"/>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <form action="{% url 'review' movie.id %}" method="post">
+                {% csrf_token %}
+                <h2>제목</h2>
+                <input name="title" class="form_control" type="text"/>
+                <h2>내용</h2>
+                <textarea name="content" class="form-control" rows="20"></textarea>
+                <button type="submit" class="btn bt-block btn-primary">제출</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

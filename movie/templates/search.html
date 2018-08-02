@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>영화 검색</h1>
+    <form action="{% url 'search' %}" method="POST">
+        {% csrf_token %}
+        <input class="form-control" type="text" name="keyword"/>
+        <button class="btn btn-primary btn-block" type="submit">검색</button>
+    </form>
+
+    {% if result %}
+        <p>검색어 : {{ result.keyword }}</p>
+        <div class="row">
+            {% for movie in result.movie_set.all %}
+                <div class="col-sm-4 col-md-6">
+                    <div class="jumbotron">
+                        <a href="{% url 'review' movie.id %}">
+                            <p><strong>{{ movie.name }}</strong>({{ movie.release_date }})</p>
+                            <img width="100px" src="{{ movie.img_url }}"/>
+                        </a>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+    {% elif result == False %}
+        검색결과가 존재하지 않습니다.
+    {% endif %}
+{% endblock %}
