@@ -23,13 +23,15 @@
                                 <h6>리뷰</h6>
                                 <ul>
                                     {% for review in reviews %}
-                                        <li>{{ review.title }}</li>
+                                        <li>
+                                            {{ review.title }}
+                                        <a href="{% url 'review_delete' movie.id review.id %}">삭제</a>
+                                        </li>
                                     {% endfor %}
                                 </ul>
                             {% endif %}
                         {% endwith %}
                     </div>
-
                 </div>
             {% endfor %}
         </div>

@@ -17,3 +17,9 @@ def review(request, movie_id):
         'movie': movie,
     }
     return render(request, 'review.html', result)
+
+def review_delete(request, movie_id, review_id):
+    movie = get_object_or_404(Movie, pk=movie_id)
+    get_review = get_object_or_404(movie.review_set, pk=review_id)
+    get_review.delete()
+    return redirect('review', movie_id=movie_id)
